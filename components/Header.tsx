@@ -43,29 +43,29 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
 
   return (
     <header className="glass-nav sticky top-0 z-50 border-b border-[#1A237E]/20">
-      <div className="container mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+      <div className="container mx-auto px-4 py-3.5 flex items-center justify-between gap-3 lg:gap-4">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-black text-white flex items-center gap-2 tracking-tighter">
-          <div className="w-10 h-10 bg-[#FF6F00] rounded-xl flex items-center justify-center shadow-lg shadow-[#FF6F00]/20">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <Link to="/" className="text-xl lg:text-2xl font-black text-white flex items-center gap-2 tracking-tighter shrink-0">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 bg-[#FF6F00] rounded-xl flex items-center justify-center shadow-lg shadow-[#FF6F00]/20">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
-          <span className="hidden sm:inline">NovaMart</span>
+          <span className="hidden lg:inline">NovaMart</span>
         </Link>
 
         {/* Search Bar */}
-        <div className="flex-1 max-w-2xl relative">
+        <div className="flex-1 relative">
           <form onSubmit={handleSearch} className="relative group">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <svg className={`w-5 h-5 ${isSearching ? 'text-[#FF6F00] animate-pulse' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="absolute inset-y-0 left-3 lg:left-4 flex items-center pointer-events-none">
+              <svg className={`w-4 h-4 lg:w-5 lg:h-5 ${isSearching ? 'text-[#FF6F00] animate-pulse' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               type="text"
-              className="w-full bg-white border-none focus:ring-2 focus:ring-[#FF6F00] rounded-xl py-3 pl-12 pr-6 outline-none transition-all duration-300 font-bold text-sm text-slate-900"
-              placeholder="Search products, brands and more..."
+              className="w-full bg-white border-none focus:ring-2 focus:ring-[#FF6F00] rounded-xl py-2 lg:py-3 pl-9 lg:pl-12 pr-4 lg:pr-6 outline-none transition-all duration-300 font-bold text-xs lg:text-sm text-slate-900 placeholder:text-slate-400"
+              placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
 
           {/* AI Suggestions Dropdown */}
           {suggestions.length > 0 && (
-            <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-2">
+            <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-2">
               <div className="px-6 py-2 bg-slate-50 border-b border-slate-100">
                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Smart Suggestions</span>
               </div>
@@ -95,9 +95,9 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
           )}
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-3 sm:gap-6">
-          <Link to="/wishlist" className="hidden sm:flex relative text-white hover:text-[#FFC107] transition-all">
+        {/* Actions - Conditionally hidden on mobile in favor of BottomNav */}
+        <div className="flex items-center gap-3 lg:gap-6 shrink-0">
+          <Link to="/wishlist" className="hidden lg:flex relative text-white hover:text-[#FFC107] transition-all">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
             {wishlistCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#D32F2F] text-white text-[8px] font-black rounded-full w-4 h-4 flex items-center justify-center border border-white">
@@ -106,9 +106,9 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
             )}
           </Link>
 
-          <Link to="/cart" className="relative text-white hover:text-[#FFC107] transition-all flex items-center gap-2 group">
+          <Link to="/cart" className="hidden lg:flex relative text-white hover:text-[#FFC107] transition-all items-center gap-2 group">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-            <div className="hidden md:flex flex-col items-start -space-y-1">
+            <div className="hidden xl:flex flex-col items-start -space-y-1">
               <span className="text-[10px] font-bold opacity-60 uppercase tracking-widest">Bag</span>
               <span className="text-xs font-black">{cartCount} Items</span>
             </div>
@@ -118,7 +118,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
             <div className="relative">
               <button 
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-9 h-9 bg-[#FFC107] rounded-lg flex items-center justify-center text-[#1A237E] font-black cursor-pointer hover:scale-105 transition-all text-xs"
+                className="w-8 h-8 lg:w-9 lg:h-9 bg-[#FFC107] rounded-lg flex items-center justify-center text-[#1A237E] font-black cursor-pointer hover:scale-105 transition-all text-xs"
               >
                 {currentUser.name[0]}
               </button>
@@ -130,7 +130,6 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
                       <div className="text-[9px] text-slate-400 font-bold truncate tracking-widest">{currentUser.email}</div>
                    </div>
                    
-                   {/* Conditional Admin Link */}
                    {currentUser.role === 'ADMIN' && (
                      <Link to="/admin" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 w-full px-4 py-2.5 text-xs font-bold text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all">
                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
@@ -153,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, currentUser, 
           ) : (
             <Link 
               to="/login"
-              className="bg-[#FF6F00] text-white px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#FF6F00]/20 hover:bg-[#FF8F00] transition-all active:scale-95"
+              className="bg-[#FF6F00] text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-xl text-[10px] lg:text-xs font-black uppercase tracking-widest shadow-lg shadow-[#FF6F00]/20 hover:bg-[#FF8F00] transition-all active:scale-95"
             >
               Login
             </Link>

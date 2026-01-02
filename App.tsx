@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
+import BottomNav from './components/BottomNav';
 import HomePage from './pages/HomePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
@@ -86,7 +87,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col selection:bg-[#FF6F00] selection:text-white pb-24 md:pb-0 bg-white">
+      <div className="min-h-screen flex flex-col selection:bg-[#FF6F00] selection:text-white bg-white">
         <Header 
           cartCount={totalItems} 
           wishlistCount={wishlist.length}
@@ -108,7 +109,7 @@ const App: React.FC = () => {
           </div>
         )}
 
-        <main className="flex-1">
+        <main className="flex-1 pb-20 lg:pb-0">
           <Routes>
             <Route path="/" element={<HomePage onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlistIds={wishlistIds} />} />
             <Route path="/product/:id" element={<ProductDetailPage onAddToCart={addToCart} />} />
@@ -121,11 +122,13 @@ const App: React.FC = () => {
             <Route path="/admin" element={currentUser?.role === 'ADMIN' ? <AdminDashboard /> : <Navigate to="/" />} />
           </Routes>
         </main>
+
+        <BottomNav cartCount={totalItems} wishlistCount={wishlist.length} />
         
-        <footer className="bg-[#1A237E] text-white pt-20 pb-10 hidden md:block">
+        <footer className="bg-[#1A237E] text-white pt-20 pb-16 lg:pb-10">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-12 mb-16">
-              <div className="col-span-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+              <div className="col-span-1 lg:col-span-2">
                 <div className="text-2xl font-black text-white flex items-center gap-3 mb-6 tracking-tighter">
                   <div className="w-10 h-10 bg-[#FF6F00] rounded-lg flex items-center justify-center text-white">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
@@ -170,7 +173,7 @@ const App: React.FC = () => {
               </div>
             </div>
             
-            <div className="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            <div className="border-t border-white/10 pt-10 flex flex-col lg:flex-row justify-between items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
               <p>© 2024 NOVAMART INC. ALL RIGHTS RESERVED.</p>
               <div className="flex gap-8">
                 <a href="#" className="hover:text-white">Privacy</a>
