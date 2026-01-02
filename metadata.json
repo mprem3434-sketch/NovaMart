@@ -1,0 +1,7 @@
+{
+  "name": "NovaMart - Premium E-commerce Platform",
+  "description": "A full-featured, high-performance e-commerce application featuring AI-powered search, product management, and a seamless shopping experience inspired by global retail giants.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
